@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.prefs.Preferences;
 
 import javax.swing.JFileChooser;
@@ -87,7 +88,6 @@ public class NotePadController{
 	                     if (pageNum>0)
 	                         return Printable.NO_SUCH_PAGE;
 	                     pg.drawString(view.getTextPane().getText(), 500, 500);
-//What is this paint?	    paint(pg);
 	                     return Printable.PAGE_EXISTS;
 	                 }
 	             });
@@ -120,27 +120,31 @@ public class NotePadController{
 		}
 	}
 	class RecentListener implements ActionListener {
+		HashMap<String,String> hs = model.getRecentFiles(); //contains filepaths
+		JMenu subMenu = view.getSubMenu(); 
+		private JMenuItem menuitem;
+		private String filePath;
+		
 		public void actionPerformed(ActionEvent e) {
-			JMenu subMenu = view.getSubMenu();
-			JMenuItem menuitem;
+			
+			//traverse through each MenuItem
 			for(int i=0 ; i<subMenu.getItemCount(); i++) {
 				menuitem = subMenu.getItem(i);
-				menuitem.addActionListener(new OpenRecentListener());
+				
+				for(String key: hs.keySet()) {
+					if(menuitem.getName().equals(key)) {
+						filePath = hs.get(key);
+			           try { //this opens the file
+			        	   FileReader reader = new FileReader(filePath);
+			        	   BufferedReader bread = new BufferedReader(reader);
+			        	   view.getTextPane().read(bread, null);
+			           } catch (IOException ex) {}
+					}
+				}
 			}
+			
 		}
 	}
-		class OpenRecentListener implements ActionListener{
-			public void actionPerformed(ActionEvent e) {
-				File fileToOpen = null;
-				JFileChooser fc = new JFileChooser();
-		        String filename = 
-	           try {
-	        	   FileReader reader = new FileReader(filename);
-	        	   BufferedReader bread = new BufferedReader(reader);
-	        	   view.getTextPane().read(bread, null);
-	           } catch (IOException ex) {}
-			}
-		}
 	class CopyListener implements ActionListener {	
 		public void actionPerformed(ActionEvent e) {
 	    	view.getTextPane().copy();
