@@ -6,3 +6,5 @@ The following were refactored due to code smells:
 2. field names were not self-explanatory
 3. undo() method was deadcode 
 4. the whole programm was jammed into one class. 
+
+Open Recent File does not work, I couldn't figure it out.
