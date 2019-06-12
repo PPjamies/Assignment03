@@ -2,6 +2,7 @@ package HW_03;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -9,12 +10,12 @@ import java.util.Queue;
 public class NotePadModel {
 	private int MAX; //recent 5 files opened
 	private int counter; //count the # of files in queue
-	private HashMap<String,String> recent; //stores the recent 5 file paths
+	private LinkedHashMap<String,String> recent; //stores the recent 5 file paths
 	
 	public NotePadModel() {
 		this.MAX = 5;
 		this.counter = 0;
-		this.recent = new HashMap<>();
+		this.recent = new LinkedHashMap<>();
 	}
 	
 	public void updateRecentDB(String fileName, String filePath) {

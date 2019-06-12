@@ -1,12 +1,9 @@
 package HW_03;
 
-import java.awt.Component;
+
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
@@ -17,14 +14,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.prefs.Preferences;
 
 import javax.swing.JFileChooser;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.text.Position;
@@ -44,7 +35,7 @@ public class NotePadController{
 	    view.addSaveListener(new SaveListener());
 	    view.addPrintListener(new PrintListener());
 	    view.addOpenListener(new OpenListener());
-	    view.addRecentListener(new RecentListener());
+	   // view.addRecentListener(new RecentListener());
 	    view.addCopyListener(new CopyListener());
 	    view.addPasteListener(new PasteListener());
 	    view.addReplaceListener(new ReplaceListener());
@@ -88,6 +79,7 @@ public class NotePadController{
 	                     if (pageNum>0)
 	                         return Printable.NO_SUCH_PAGE;
 	                     pg.drawString(view.getTextPane().getText(), 500, 500);
+	                     //paint(pg);
 	                     return Printable.PAGE_EXISTS;
 	                 }
 	             });
@@ -119,32 +111,32 @@ public class NotePadController{
 	        }
 		}
 	}
-	class RecentListener implements ActionListener {
-		HashMap<String,String> hs = model.getRecentFiles(); //contains filepaths
-		JMenu subMenu = view.getSubMenu(); 
-		private JMenuItem menuitem;
-		private String filePath;
-		
-		public void actionPerformed(ActionEvent e) {
-			
-			//traverse through each MenuItem
-			for(int i=0 ; i<subMenu.getItemCount(); i++) {
-				menuitem = subMenu.getItem(i);
-				
-				for(String key: hs.keySet()) {
-					if(menuitem.getName().equals(key)) {
-						filePath = hs.get(key);
-			           try { //this opens the file
-			        	   FileReader reader = new FileReader(filePath);
-			        	   BufferedReader bread = new BufferedReader(reader);
-			        	   view.getTextPane().read(bread, null);
-			           } catch (IOException ex) {}
-					}
-				}
-			}
-			
-		}
-	}
+//	class RecentListener implements ActionListener {
+//		HashMap<String,String> hs = model.getRecentFiles(); //contains filepaths
+//		JMenu subMenu = view.getSubMenu(); 
+//		private JMenuItem menuitem;
+//		private String filePath;
+//		
+//		public void actionPerformed(ActionEvent e) {
+//			
+//			//traverse through each MenuItem
+//			for(int i=0 ; i<subMenu.getItemCount(); i++) {
+//				menuitem = subMenu.getItem(i);
+//				
+//				for(String key: hs.keySet()) {
+//					if(menuitem.getName().equals(key)) {
+//						filePath = hs.get(key);
+//			           try { //this opens the file
+//			        	   FileReader reader = new FileReader(filePath);
+//			        	   BufferedReader bread = new BufferedReader(reader);
+//			        	   view.getTextPane().read(bread, null);
+//			           } catch (IOException ex) {}
+//					}
+//				}
+//			}
+//			
+//		}
+//	}
 	class CopyListener implements ActionListener {	
 		public void actionPerformed(ActionEvent e) {
 	    	view.getTextPane().copy();

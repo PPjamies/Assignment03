@@ -106,9 +106,9 @@ public class NotePadView extends JFrame{
     void addOpenListener(ActionListener open) {
     	openFile_MenuItem.addActionListener(open);	
     }
-    void addRecentListener(ActionListener recent) {
-    	menuItem.addActionListener(recent);
-    }
+//    void addRecentListener(ActionListener recent) {
+//    	menuItem.addActionListener(recent);
+//    }
     void addCopyListener(ActionListener copy) {
     	copy_MenuItem.addActionListener(copy);
     }
