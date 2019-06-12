@@ -1,4 +1,4 @@
-package HW_03;
+package test;
 
 public class NotePadApp {
     public static void main(String[] args) {

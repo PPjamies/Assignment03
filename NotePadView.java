@@ -1,4 +1,4 @@
-package HW_03;
+package test;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.prefs.Preferences;
@@ -36,7 +37,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.Position;
 import javax.swing.text.StyledDocument;
 
-import HW_03.NotePadController.ReplaceListener;
+import test.NotePadController.ReplaceListener;
 
 //This Class is to display the view of the UI Components
 public class NotePadView extends JFrame{
@@ -106,9 +107,14 @@ public class NotePadView extends JFrame{
     void addOpenListener(ActionListener open) {
     	openFile_MenuItem.addActionListener(open);	
     }
-//    void addRecentListener(ActionListener recent) {
-//    	menuItem.addActionListener(recent);
-//    }
+    
+    void addOpenWithoutDialogListener(JMenuItem menuItem, ActionListener openWithoutDialog) {
+    	menuItem.addActionListener(openWithoutDialog);	
+    }
+    
+    void addRecentListener(ActionListener recent) {
+    	menuItem.addActionListener(recent);
+    }
     void addCopyListener(ActionListener copy) {
     	copy_MenuItem.addActionListener(copy);
     }
@@ -125,10 +131,5 @@ public class NotePadView extends JFrame{
     }
     JMenu getSubMenu() {
     	return this.subMenu;
-    }
-    void updateSubMenu(String fileName) {
-    	menuItem = new JMenuItem(fileName);
-    	subMenu.add(menuItem);
-    	subMenu.addSeparator();
     }
 }
